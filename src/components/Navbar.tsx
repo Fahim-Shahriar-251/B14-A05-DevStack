@@ -1,11 +1,11 @@
-import Logo from "../assets/logo-text.png";
+import logo from "../assets/logo-text.png";
 
 const Navbar = () => {
     return (
         <nav className='sticky top-0 z-40'>
             <div className='container mx-auto flex justify-between items-center p-2'>
                 <div>
-                    <img src={Logo} alt="Logo" />
+                    <img src={logo} alt="Logo" />
                 </div>
 
                 <div>
