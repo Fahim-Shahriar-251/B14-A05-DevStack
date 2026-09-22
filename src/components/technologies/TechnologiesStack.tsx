@@ -12,11 +12,7 @@ const TechnologiesStack = ({ technologyDataPromise }: technologyProps) => {
     return (
         <div>
             {
-                technologies.map(technology => {
-                    return (
-                        <img key={technology.id} src={technology.icon} alt="" />
-                    );
-                })
+                
             }
         </div>
     );
