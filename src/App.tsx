@@ -1,11 +1,23 @@
+import { Suspense, useState } from "react";
+import TechnologiesStack from "./components/technologies/TechnologiesStack";
+import type { technologyType } from "./type";
+
+const fectchTechnologyData = async (): Promise<technologyType[]> => {
+    const res = await fetch("./data.json");
+    const data = await res.json();;
+    return data;
+}
+
 function App() {
 
-  return (
-    <>
-      <h2 className='text-red-400'>Welcome to hell</h2>
-      <button className="btn btn-neutral">Neutral</button>
-    </>
-  )
+    const [technologyDataPromise] = useState(() => fectchTechnologyData());
+    return (
+        <>
+            <Suspense fallback={<div>Loading Data...</div>}>
+                <TechnologiesStack technologyDataPromise={technologyDataPromise} ></TechnologiesStack>
+            </Suspense>
+        </>
+    )
 }
 
 export default App;
