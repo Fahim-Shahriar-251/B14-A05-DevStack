@@ -2,17 +2,24 @@ import { FaStar } from 'react-icons/fa';
 import type { technologyType } from '../../type';
 
 export interface technologiesProps {
-    technologies: technologyType[]
+    technologies: technologyType[];
+    addedStack: technologyType[];
+    handleAddedStack: (technology: technologyType) => void;
 }
 
-const TechnologiesCard = ({ technologies }: technologiesProps) => {
+const TechnologiesCard = ({ technologies, addedStack, handleAddedStack }: technologiesProps) => {
 
     return (
         <div className='grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3'>
             {
                 technologies.map(technology => {
+
+                    const isAdded = addedStack.some(
+                        addedTechnology => addedTechnology.id === technology.id
+                    );
+
                     return (
-                        <div className='conainter mx-auto border border-gray-300 rounded-2xl p-4 space-y-5'>
+                        <div key={technology.id} className='conainter mx-auto border border-gray-300 rounded-2xl p-4 space-y-5'>
                             <div className='flex justify-between items-center'>
                                 <img className='h-9 w-auto' src={technology.icon} alt="" />
                                 <p className='bg-linear-to-r from-[#EC4899] to-[#8B5CF6] p-1.5 rounded-xl text-white'> {technology.badge} </p>
@@ -29,7 +36,11 @@ const TechnologiesCard = ({ technologies }: technologiesProps) => {
                                         {technology.rating}
                                     </p>
                                 </div>
-                                <button className="btn btn-neutral w-full rounded-2xl ">Add to Stack</button>
+                                <button onClick={() => handleAddedStack(technology)}
+                                    className="btn btn-neutral w-full rounded-2xl"
+                                    disabled={isAdded}>
+                                    Add to Stack
+                                </button>
                             </div>
                         </div>
                     )

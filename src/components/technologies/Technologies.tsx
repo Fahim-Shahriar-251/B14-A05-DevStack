@@ -1,6 +1,8 @@
-import { use } from 'react';
+import { use, useState } from 'react';
 import type { technologyType } from '../../type';
 import TechnologiesCard from './TechnologiesCard';
+import YourStack from './YourStack';
+import { toast } from 'react-toastify';
 
 export interface technologyProps {
     technologyDataPromise: Promise<technologyType[]>;
@@ -9,6 +11,12 @@ export interface technologyProps {
 const Technologies = ({ technologyDataPromise }: technologyProps) => {
 
     const technologies = use(technologyDataPromise);
+
+    const [addedStack, setAddedStack] = useState<technologyType[]>([]);
+    const handleAddedStack = (technology: technologyType): void => {
+        setAddedStack([...addedStack, technology]);
+        toast.success(`${technology.name} successfully added to your stack`);
+    }
 
     return (
         <div className='container mx-auto'>
@@ -22,12 +30,12 @@ const Technologies = ({ technologyDataPromise }: technologyProps) => {
 
             <div className='grid grid-cols-1 md:grid-cols-4 mt-15 gap-6'>
                 <div className='md:col-span-3'>
-                    <TechnologiesCard technologies={technologies}></TechnologiesCard>
+                    <TechnologiesCard technologies={technologies} addedStack={addedStack} handleAddedStack={handleAddedStack}></TechnologiesCard>
                 </div>
 
-                <div className='md:col-span-1 bg-amber-300'>
+                <div className='md:col-span-1'>
                     <div>
-
+                        <YourStack addedStack={addedStack} setAddedStack={setAddedStack}></YourStack>
                     </div>
                 </div>
             </div>
