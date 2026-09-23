@@ -1,6 +1,9 @@
+import { useState } from "react";
 import banner from "../assets/banner-stack.png"
 
 const Banner = () => {
+
+    const [active, setActive] = useState("exTech");
 
     return (
         <div className="container mx-auto flex justify-between items-center p-2 mt-10 mb-10">
@@ -11,14 +14,20 @@ const Banner = () => {
                         Development Stack
                     </span>
                 </h2>
-                <p className="text-left">
+                <p className="text-left text-gray-600">
                     Explore frontend, backend, database, and tooling options,
                     compare them side by side, and put together the stack that fits your
                     next project.
                 </p>
                 <div className="flex gap-4">
-                    <button className="btn rounded-2xl bg-linear-to-r from-[#F97316] to-[#EC4899] ">Explore Technologies</button>
-                    <button className="btn rounded-2xl ">Learn More</button>
+                    <button onClick={() => setActive("exTech")}
+                        className={`btn rounded-2xl ${active === "exTech" ? "bg-linear-to-r from-[#F97316] to-[#EC4899]" : ""} `}>
+                        Explore Technologies
+                    </button>
+                    <button onClick={() => setActive("learnMore")}
+                        className={`btn rounded-2xl ${active === "learnMore" ? "bg-linear-to-r from-[#F97316] to-[#EC4899]" : ""} `}>
+                        Learn More
+                    </button>
                 </div>
             </div>
 

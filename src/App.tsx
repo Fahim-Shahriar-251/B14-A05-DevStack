@@ -1,9 +1,9 @@
 import { Suspense, useState } from "react";
-import TechnologiesStack from "./components/technologies/TechnologiesStack";
 import type { technologyType } from "./type";
 import Navbar from "./components/Navbar";
 import Banner from "./components/Banner";
 import Footer from "./components/Footer";
+import Technologies from "./components/technologies/Technologies";
 
 const fectchTechnologyData = async (): Promise<technologyType[]> => {
     const res = await fetch("./data.json");
@@ -19,7 +19,7 @@ function App() {
             <Navbar></Navbar>
             <Banner></Banner>
             <Suspense fallback={<div>Loading Data...</div>}>
-                <TechnologiesStack technologyDataPromise={technologyDataPromise} ></TechnologiesStack>
+                <Technologies technologyDataPromise={technologyDataPromise}></Technologies>
             </Suspense>
             <Footer></Footer>
         </>
